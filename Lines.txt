@@ -1,0 +1,3 @@
+2
+A Szczecin Stargard 45 50
+B Szczecin Goleniow 40 40

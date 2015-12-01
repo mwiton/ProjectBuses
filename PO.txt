@@ -1,0 +1,23 @@
+19.11 Projekt 3 
+atrybut sta³y klasy
+agregacja
+przyjazn klasy z klasa
+klasa zagniezdzona
+konstruktkor kopiuj¹cy
+destruktor
+wskaznik this
+funkcjonalnosc zwiazana z dynamiczna obsluga pamieci
+odczyt i zapis do plikow
+classA {
+1	const int i;
+2	class B{
+
+	};
+	public:
+	remove();
+3	create();
+	A(A);
+	A(int=0)
+	B**
+	friend B
+};

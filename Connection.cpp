@@ -102,7 +102,7 @@ std::string Connection::passangersToString() const{
 void createFromInput(TablePointers<Connection> &tab, const TablePointers<BusLine> &tabLine, const TablePointers<Bus> &tabBus) {
 	//Tworzy nowy objekt w tablicy wykorzystujac dane z konsoli
 	std::string name;
-	int idbus, idline, numberPassengers;
+	int idbus, idline;
 	std::cout << "Podaj nazwe: ";
 	std::cin >> name;
 	std::cout << "Podaj ID linii: ";
@@ -117,7 +117,7 @@ int Connection::findPassenger(const Passenger *passenger) const{
 	//Znajduje pasazera w liscie pasazerow w autobusie i zwraca jego index
 	//Gdy nie znajduje sie ten pasazer w liscie zwraca -1
 	for (int i = 0; i < numberPassengers; ++i) {
-		if (passengersInBus[i].passenger->getName() == passenger->getName()) return i;
+		if (passengersInBus[i].passenger == passenger) return i;
 	}
 	return -1;
 }
@@ -134,7 +134,7 @@ Connection::Connection(Connection &connection) {
 	}
 }
 
-Connection &Connection::operator=(Connection &connection) {
+void Connection::operator=(Connection &connection) {
 	nameOfConnection = connection.nameOfConnection;
 	line = connection.line;
 	bus = connection.bus;

@@ -39,3 +39,7 @@ std::ostream &operator<<(std::ostream &os, const Passenger &passenger) {
 	os << "Nazwa pasazera: " << passenger.getName();
 	return os;
 }
+
+bool Passenger::operator==(Passenger passenger) {
+	return name == passenger.name;
+}

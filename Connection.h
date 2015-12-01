@@ -29,7 +29,7 @@ public:
 	Connection(std::string name="", BusLine* l=0, Bus* b=0):
 			nameOfConnection(name), line(l), bus(b), numberPassengers(0), passengersInBus(0){ }
 	Connection(Connection&);
-	Connection &operator=(Connection&);
+	void operator=(Connection&);
 	Connection& set(std::string, BusLine*, Bus*);
 	std::string getNameOfConnection() const;
 	BusLine* getBusLine() const;

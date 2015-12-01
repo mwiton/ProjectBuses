@@ -13,6 +13,7 @@ public:
 	Passenger(Passenger&);
 	Passenger & set(std::string);
 	std::string getName() const;
+	bool operator==(Passenger passenger);
 };
 
 void createFromInput(TablePointers<Passenger> &tab);

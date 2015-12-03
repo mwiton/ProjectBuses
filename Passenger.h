@@ -14,10 +14,8 @@ public:
 	Passenger & set(std::string);
 	std::string getName() const;
 	bool operator==(Passenger passenger);
+	static void createFromInput(TablePointers<Passenger> &tab);
 };
-
-void createFromInput(TablePointers<Passenger> &tab);
-void insert(Passenger **&tab, int &size, int index);
 std::ostream &operator<<(std::ostream &os, const Passenger &passenger);
-
+//void insert(Passenger **&tab, int &size, int index);
 #endif

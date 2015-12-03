@@ -15,9 +15,8 @@ public:
 	Bus& set(std::string, int);
 	std::string getNameOfBus() const;
 	int getAmountOfPlaces() const;
+	static void createFromInput(TablePointers<Bus>&);
 };
 
-void createFromInput(TablePointers<Bus>&);
 std::ostream &operator<<(std::ostream&, const Bus&);
-
 #endif

@@ -1,12 +1,13 @@
 #include "FileTools.h"
 
-void readBusLines(const std::string string, TablePointers<BusLine> &tab) {
+void ReadWriteFuctions::readBusLines(const std::string string, TablePointers<BusLine> &tab) {
     std::ifstream input;
     std::string name, start, end;
     int len, t;
     int size;
     input.open(string);
     if(!(input.is_open())) return;
+	
     input >> size;
     for (int i = 0; i < size; ++i) {
         input >> name >> start >> end >> len >> t;
@@ -16,7 +17,7 @@ void readBusLines(const std::string string, TablePointers<BusLine> &tab) {
     input.close();
 }
 
-void readBuses(const std::string string, TablePointers<Bus> &tab) {
+void ReadWriteFuctions::readBuses(const std::string string, TablePointers<Bus> &tab) {
     std::ifstream input;
     std::string nameBuS;
     int size, amount;
@@ -31,7 +32,7 @@ void readBuses(const std::string string, TablePointers<Bus> &tab) {
     input.close();
 }
 
-void readPassengers(const std::string string, TablePointers<Passenger> &tab) {
+void ReadWriteFuctions::readPassengers(const std::string string, TablePointers<Passenger> &tab) {
     std::ifstream input;
     std::string name;
     int size;
@@ -46,7 +47,7 @@ void readPassengers(const std::string string, TablePointers<Passenger> &tab) {
     input.close();
 }
 
-void readConnections(const std::string string, TablePointers<Connection> &tab,
+void ReadWriteFuctions::readConnections(const std::string string, TablePointers<Connection> &tab,
                      const TablePointers<BusLine> &line, const TablePointers<Bus> &buses,
                      const TablePointers<Passenger> &passengers) {
     std::ifstream input;
@@ -73,7 +74,7 @@ void readConnections(const std::string string, TablePointers<Connection> &tab,
     input.close();
 }
 
-void writeBusLines(std::string string, const TablePointers<BusLine> &tab) {
+void ReadWriteFuctions::writeBusLines(std::string string, const TablePointers<BusLine> &tab) {
     std::ofstream output;
     output.open(string);
     if(!(output.is_open())) return;
@@ -84,7 +85,7 @@ void writeBusLines(std::string string, const TablePointers<BusLine> &tab) {
     }
 }
 
-void writeBuses(std::string string, const TablePointers<Bus> &tab) {
+void ReadWriteFuctions::writeBuses(std::string string, const TablePointers<Bus> &tab) {
     std::ofstream output;
     output.open(string);
     if(!(output.is_open())) return;
@@ -94,7 +95,7 @@ void writeBuses(std::string string, const TablePointers<Bus> &tab) {
     }
 }
 
-void writePassengers(std::string string, const TablePointers<Passenger> &tab) {
+void ReadWriteFuctions::writePassengers(std::string string, const TablePointers<Passenger> &tab) {
     std::ofstream output;
     output.open(string);
     if(!(output.is_open())) return;
@@ -104,7 +105,7 @@ void writePassengers(std::string string, const TablePointers<Passenger> &tab) {
     }
 }
 
-void writeConnections(std::string string, const TablePointers<Connection> &tab,
+void ReadWriteFuctions::writeConnections(std::string string, const TablePointers<Connection> &tab,
                       const TablePointers<BusLine> &line, const TablePointers<Bus> &buses) {
     std::ofstream output;
     int idbus=0, idline=0;

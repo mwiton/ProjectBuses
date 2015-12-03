@@ -30,7 +30,7 @@ int BusLine::getTime() const{
 	return time;
 }
 
-void createFromInput(TablePointers<BusLine> &tab) {
+void BusLine::createFromInput(TablePointers<BusLine> &tab) {
 	//Tworzy nowy objekt w tablicy wykorzystujac dane z konsoli
 	std::string name, start, end;
 	int len, time;

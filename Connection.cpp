@@ -99,7 +99,7 @@ std::string Connection::passangersToString() const{
 	return ret;
 }
 
-void createFromInput(TablePointers<Connection> &tab, const TablePointers<BusLine> &tabLine, const TablePointers<Bus> &tabBus) {
+void Connection::createFromInput(TablePointers<Connection> &tab, const TablePointers<BusLine> &tabLine, const TablePointers<Bus> &tabBus) {
 	//Tworzy nowy objekt w tablicy wykorzystujac dane z konsoli
 	std::string name;
 	int idbus, idline;

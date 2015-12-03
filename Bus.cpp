@@ -15,7 +15,7 @@ int Bus::getAmountOfPlaces() const
 	return amountOfPlaces;
 }
 
-void createFromInput(TablePointers<Bus> &tab) {
+void Bus::createFromInput(TablePointers<Bus> &tab) {
 	//Tworzy nowy objekt w tablicy wykorzystujac dane z konsoli
     std::string name;
     int amount;
@@ -27,7 +27,7 @@ void createFromInput(TablePointers<Bus> &tab) {
     tab.addElement(bus);
 }
 
-std::ostream &operator<<(std::ostream &os, const Bus &bus) {
+std::ostream& operator<<(std::ostream &os, const Bus &bus) {
     //Reprezentacja obiektu w konsoli
     os << "Numer autobusu: " << bus.getNameOfBus() << "\nIlosc miejsc: " << bus.getAmountOfPlaces();
     return os;

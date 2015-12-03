@@ -12,8 +12,27 @@ public:
     void addElement(T* element);
     void removeElement(int index);
     void removeAll();
+	//Iterator<T> getIterator() const { Iterator<T> it(this); return it; } 
     T* operator[](std::size_t n) const { return table[n];}
     ~TablePointers() { removeAll(); delete[] table;}
+	/*
+	template <typename T> class Iterator{
+	public:
+		Iterator(TablePointers<T> *tab): current(0), table(tab) {}
+		void operator++(){
+			++current;
+		}
+		T &operator*(){
+			if(current < table->size()){
+				return (*table)[current];
+			}
+			else return 0;
+		}
+	private:
+		int current;
+		TablePointers<T> *table;
+	};
+	*/
 private:
     T **table;
     int size;
@@ -49,7 +68,7 @@ template <typename T> void TablePointers<T>::addElement(T *element) {
     for(int i=0; i<size; ++i){
         newTab[i] = table[i];
     }
-    if(size) delete[] table;http://www.onet.pl/
+    if(size) delete[] table;
     table = newTab;
     ++size;
     table[size-1]=element;

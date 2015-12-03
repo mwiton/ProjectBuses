@@ -61,8 +61,7 @@ public:
 	std::string passangersToString() const;
 	int getNumberPassengers() const;
 	~Connection() {delete[] passengersInBus; }
+	static void createFromInput(TablePointers<Connection> &tab, const TablePointers<BusLine> &tabLine, const TablePointers<Bus> &tabBus);
 };
-
-void createFromInput(TablePointers<Connection> &tab, const TablePointers<BusLine> &tabLine, const TablePointers<Bus> &tabBus);
 std::ostream &operator<<(std::ostream &os, const Connection connection);
 #endif

@@ -1,42 +1,18 @@
 #include "Main.h"
 
-/*
-Projekt nr 3 - dynamiczne zarzadzanie pamiecia
-praca na plikach
-dodawanie elementow
-
-void dodaj(B *&b, int &bsize){
-	1.stworz lokalna tablice o rozmiarze bsize+1
-	2. skopiuj stare dane do nowej
-	3. usun pamiec stara tablice
-	4. podpiac pod wskaznik nowa tablice
-	5. zwieksz bsize o 1
-	}
-
-void dodaj(M **&m, int &msize){
-	1.stworz lokalna tablice o rozmiarze msize+1
-	2. skopiuj stare dane do nowej
-	3. usun pamiec stara tablice
-	4. podpiac pod wskaznik nowa tablice
-	5. zwieksz msize o 1
-	}
-
-void usun(B *&b, int &bsize, int index){
-*/
-
 int main() {
 	//Czytanie danych z plikow
-    readBusLines("Lines.txt", lines);
-    readBuses("Buses.txt", buses);
-    readPassengers("Passangers.txt", passengers);
-    readConnections("Connections.txt", connections, lines, buses, passengers);
+    ReadWriteFuctions::readBusLines("Lines.txt", lines);
+    ReadWriteFuctions::readBuses("Buses.txt", buses);
+    ReadWriteFuctions::readPassengers("Passangers.txt", passengers);
+    ReadWriteFuctions::readConnections("Connections.txt", connections, lines, buses, passengers);
 
     menu1();
 
-    writeBusLines("Lines.txt", lines);
-    writeBuses("Buses.txt", buses);
-    writePassengers("Passangers.txt", passengers);
-    writeConnections("Connections.txt", connections, lines, buses);
+    ReadWriteFuctions::writeBusLines("Lines.txt", lines);
+    ReadWriteFuctions::writeBuses("Buses.txt", buses);
+    ReadWriteFuctions::writePassengers("Passangers.txt", passengers);
+    ReadWriteFuctions::writeConnections("Connections.txt", connections, lines, buses);
 
 	return 0;
 }
@@ -102,16 +78,16 @@ void menu3() {
     std::cin >> option;
     switch (option){
         case 1:
-            createFromInput(lines);
+            BusLine::createFromInput(lines);
             break;
         case 2:
-            createFromInput(buses);
+            Bus::createFromInput(buses);
             break;
         case 3:
-            createFromInput(passengers);
+            Passenger::createFromInput(passengers);
             break;
         case 4:
-            createFromInput(connections, lines, buses);
+            Connection::createFromInput(connections, lines, buses);
             break;
         case 5:
             break;

@@ -2,17 +2,17 @@
 
 int main() {
 	//Czytanie danych z plikow
-    ReadWriteFuctions::readBusLines("Lines.txt", lines);
-    ReadWriteFuctions::readBuses("Buses.txt", buses);
-    ReadWriteFuctions::readPassengers("Passangers.txt", passengers);
-    ReadWriteFuctions::readConnections("Connections.txt", connections, lines, buses, passengers);
+    ReadWriteFunctions::readBusLines("Lines.txt", lines);
+    ReadWriteFunctions::readBuses("Buses.txt", buses);
+    ReadWriteFunctions::readPassengers("Passangers.txt", passengers);
+    ReadWriteFunctions::readConnections("Connections.txt", connections, lines, buses, passengers);
 
     menu1();
 
-    ReadWriteFuctions::writeBusLines("Lines.txt", lines);
-    ReadWriteFuctions::writeBuses("Buses.txt", buses);
-    ReadWriteFuctions::writePassengers("Passangers.txt", passengers);
-    ReadWriteFuctions::writeConnections("Connections.txt", connections, lines, buses);
+    ReadWriteFunctions::writeBusLines("Lines.txt", lines);
+    ReadWriteFunctions::writeBuses("Buses.txt", buses);
+    ReadWriteFunctions::writePassengers("Passangers.txt", passengers);
+    ReadWriteFunctions::writeConnections("Connections.txt", connections, lines, buses);
 
 	return 0;
 }
@@ -143,7 +143,7 @@ void buyTicketsInConsole() {
 
 void cancelTicketsInConsole() {
     std::string name;
-    int amount, id, i(0);
+    int id, i(0);
     Passenger* passenger;
     std::cout << "Podaj nazwe pasazera: ";
     std::cin >> name;

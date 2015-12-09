@@ -19,32 +19,34 @@ private:
 		Passenger* passenger;
 		int amount;
 		PassengerInBus(Passenger* p = 0, int a = 0): passenger(p), amount(a) { }
-		PassengerInBus(PassengerInBus &passengerInBus): passenger(passengerInBus.passenger), amount(passengerInBus.amount) {};
+
+        PassengerInBus(PassengerInBus &passengerInBus) : passenger(passengerInBus.passenger),
+                                                         amount(passengerInBus.amount) { };
 	};
-	class Hour{
-		friend class Connection;
-		int hour;
-		int minute;
-		Hour(int h, int m): hour(h), minute(m) {}
-		Hour(int m) {
-			hour = m / 60;
-			minute = m % 60;
-		}
-		Hour() { Hour(0, 0);}
-		Hour operator+=(Hour rightHour){
-			hour += rightHour.hour;
-			int newMinute = minute + rightHour.minute;
-			if(newMinute >= 60){
-				++hour;
-				minute = newMinute - 60;
-			}
-			else minute = newMinute;
+
+    /*class Hour{
+        friend class Connection;
+        int hour;
+        int minute;
+        Hour(int h, int m): hour(h), minute(m) {}
+        Hour(int m) {
+            hour = m / 60;
+            minute = m % 60;
+        }
+        Hour() { Hour(0, 0);}
+        Hour operator+=(Hour rightHour){
+            hour += rightHour.hour;
+            int newMinute = minute + rightHour.minute;
+            if(newMinute >= 60){
+                ++hour;
+                minute = newMinute - 60;
+            }
+            else minute = newMinute;
             return *this;
-		}
-	};
+        }
+    };*/
 	PassengerInBus *passengersInBus; //tablica, ktorej rozmiar to ilosc miejsc w autobusie, a element to pasazer na tym siedzeniu
 	int findPassenger(const Passenger*) const;
-
 
 public:
 	Connection(std::string name="", BusLine* l=0, Bus* b=0):

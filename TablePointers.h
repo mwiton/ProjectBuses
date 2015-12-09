@@ -12,27 +12,42 @@ public:
     void addElement(T* element);
     void removeElement(int index);
     void removeAll();
-	//Iterator<T> getIterator() const { Iterator<T> it(this); return it; } 
     T* operator[](std::size_t n) const { return table[n];}
     ~TablePointers() { removeAll(); delete[] table;}
-	/*
-	template <typename T> class Iterator{
+
+    template<typename S>
+    class Iterator {
 	public:
-		Iterator(TablePointers<T> *tab): current(0), table(tab) {}
-		void operator++(){
-			++current;
-		}
-		T &operator*(){
-			if(current < table->size()){
-				return (*table)[current];
-			}
-			else return 0;
-		}
+        Iterator(int position, TablePointers<S> *tab) : current(position), table(tab) { }
+
+        Iterator(TablePointers<S> *tab) { Iterator(0, tab); }
+
+        void operator=(Iterator it) {
+            current = it.current;
+            table = it.table;
+        }
+
+        void operator++() { ++current; }
+
+        bool operator!=(Iterator it) { return current != it.current; }
+
+        S operator*() { return *((*table)[current]); }
+
+        S *operator->() const { return (*table)[current]; }
 	private:
 		int current;
-		TablePointers<T> *table;
+        TablePointers<S> *table;
 	};
-	*/
+
+    Iterator<T> begin() {
+        Iterator<T> it(0, this);
+        return it;
+    }
+
+    Iterator<T> end() {
+        Iterator<T> it(size, this);
+        return it;
+    }
 private:
     T **table;
     int size;

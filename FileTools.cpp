@@ -85,13 +85,13 @@ void ReadWriteFunctions::writeBusLines(std::string string, const TablePointers<B
     }
 }
 
-void ReadWriteFunctions::writeBuses(std::string string, const TablePointers<Bus> &tab) {
+void ReadWriteFunctions::writeBuses(std::string string, TablePointers<Bus> &tab) {
     std::ofstream output;
     output.open(string);
     if(!(output.is_open())) return;
     output << tab.getSize() << std::endl;
-    for (int i = 0; i < tab.getSize(); ++i) {
-        output << tab[i]->getNameOfBus() << " " << tab[i]->getAmountOfPlaces() << std::endl;
+    for (auto i = tab.begin(); i != tab.end(); ++i) {
+        output << i->getNameOfBus() << " " << i->getAmountOfPlaces() << std::endl;
     }
 }
 

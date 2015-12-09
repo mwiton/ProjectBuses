@@ -16,7 +16,7 @@ namespace ReadWriteFunctions {
 
 	void writeBusLines(std::string, const TablePointers<BusLine> &);
 
-	void writeBuses(std::string, const TablePointers<Bus> &tab);
+	void writeBuses(std::string, TablePointers<Bus> &tab);
 
 	void writePassengers(std::string, const TablePointers<Passenger> &);
 

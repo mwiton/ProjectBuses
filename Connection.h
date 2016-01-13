@@ -20,7 +20,7 @@ private:
 		int amount;
 		PassengerInBus(Passenger* p = 0, int a = 0): passenger(p), amount(a) { }
 
-        PassengerInBus(PassengerInBus &passengerInBus) : passenger(passengerInBus.passenger),
+		PassengerInBus(PassengerInBus &passengerInBus) : passenger(passengerInBus.passenger),
                                                          amount(passengerInBus.amount) { };
 	};
 

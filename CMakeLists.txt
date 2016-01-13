@@ -16,6 +16,6 @@ set(SOURCE_FILES
     FileTools.h
     FileTools.cpp
     Main.h
-    TablePointers.h)
+        TablePointers.h PassangerWithDiscount.cpp PassangerWithDiscount.h)
 
 add_executable(ProjectBuses ${SOURCE_FILES})

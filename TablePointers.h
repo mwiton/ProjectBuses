@@ -4,38 +4,36 @@
 
 template <typename T> class TablePointers{
 public:
-    TablePointers(int n);
+    TablePointers(size_t n);
     TablePointers(): table(0), size(0) {}
     TablePointers(const TablePointers &copy);
     TablePointers &operator=(const TablePointers &left);
-    int getSize() const { return size;}
+
+    size_t getSize() const { return size; }
+
+    size_t operator()() const { return size; }
     void addElement(T* element);
     void removeElement(int index);
     void removeAll();
-    T* operator[](std::size_t n) const { return table[n];}
+
+    T *&operator[](std::size_t n) const { return table[n]; }
     ~TablePointers() { removeAll(); delete[] table;}
 
     template<typename S>
     class Iterator {
 	public:
-        Iterator(int position, TablePointers<S> *tab) : current(position), table(tab) { }
-
+        Iterator(size_t position, TablePointers<S> *tab) : current(position), table(tab) { }
         Iterator(TablePointers<S> *tab) { Iterator(0, tab); }
-
         void operator=(Iterator it) {
             current = it.current;
             table = it.table;
         }
-
         void operator++() { ++current; }
-
         bool operator!=(Iterator it) { return current != it.current; }
-
         S operator*() { return *((*table)[current]); }
-
         S *operator->() const { return (*table)[current]; }
 	private:
-		int current;
+        size_t current;
         TablePointers<S> *table;
 	};
 
@@ -50,10 +48,11 @@ public:
     }
 private:
     T **table;
-    int size;
+    size_t size;
 };
 
-template <typename T> TablePointers<T>::TablePointers(int n) {
+template<typename T>
+TablePointers<T>::TablePointers(size_t n) {
     size = n;
     table = new T*[n];
     for (int i = 0; i < n; ++i) {
@@ -70,6 +69,10 @@ template <typename T> TablePointers<T>::TablePointers(const TablePointers &copy)
 }
 
 template <typename T> TablePointers<T> &TablePointers<T>::operator=(const TablePointers &right) {
+    if (table == right.table)
+        return *this;
+    if (table != NULL)
+        delete[] table;
     size = right.size;
     table = new T*[size];
     for (int i = 0; i < size; ++i) {

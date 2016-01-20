@@ -1,6 +1,7 @@
-5
-aaa
-bbb
-ccc
-ddd
-eee
+6
+aaa N
+bbb N
+ccc N
+ddd N
+eee D
+fff G

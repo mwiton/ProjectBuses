@@ -7,10 +7,9 @@ public:
     TablePointers(size_t n);
     TablePointers(): table(0), size(0) {}
     TablePointers(const TablePointers &copy);
-    TablePointers &operator=(const TablePointers &left);
 
+void operator=(const TablePointers &right);
     size_t getSize() const { return size; }
-
     size_t operator()() const { return size; }
     void addElement(T* element);
     void removeElement(int index);
@@ -68,9 +67,10 @@ template <typename T> TablePointers<T>::TablePointers(const TablePointers &copy)
     }
 }
 
-template <typename T> TablePointers<T> &TablePointers<T>::operator=(const TablePointers &right) {
+    template<typename T>
+    void TablePointers<T>::operator=(const TablePointers &right) {
     if (table == right.table)
-        return *this;
+    return;
     if (table != NULL)
         delete[] table;
     size = right.size;
@@ -78,7 +78,6 @@ template <typename T> TablePointers<T> &TablePointers<T>::operator=(const TableP
     for (int i = 0; i < size; ++i) {
         table[i] = right.table[i];
     }
-    return *this;
 }
 
 template <typename T> void TablePointers<T>::addElement(T *element) {
@@ -108,6 +107,7 @@ template <typename T> void TablePointers<T>::removeAll() {
     for (int i = 0; i < size; ++i) {
         delete table[i];
     }
+    size = 0;
 }
 
 template <typename T> std::ostream &operator<<(std::ostream &os, const TablePointers<T> &table){

@@ -23,35 +23,29 @@ Bus * Connection::getBus() const
 }
 
 int Connection::getNumberPassengers() const{
-	return numberPassengers;
+return passengers.size();
 }
 
-int Connection::purchaseTicket(Passenger * passanger, int amountOfSeats){
+bool Connection::purchaseTicket(Passenger *passanger, int amountOfSeats) {
 	/* Funkcja zakupu biletow.
 	* Do pasazera przypisana jest dana ilosc miejsc.
 	* W wypadku braku zadanej ilosci miejsc wyswietla komunikat.
 	*/
 	if (amountOfSeats > freeSeats()){ 
 		std::cout << "Pasazer " << passanger->getName() << " nie moze kupic biletow z powodu braku miejsc" << std::endl;
-		return 0;
+return false;
 	}
 	else {
 		int pas = findPassenger(passanger);
 		if(pas >= 0){
-			++(passengersInBus[pas].amount);
+		passengers[pas].amount += amountOfSeats;
 		}
 		else{
-			++numberPassengers;
-			PassengerInBus * newTab = new PassengerInBus[numberPassengers];
-			for (int i = 0; i < numberPassengers - 1; ++i) {
-				newTab[i] = passengersInBus[i];
-			}
-			delete passengersInBus;
-			passengersInBus = newTab;
-			passengersInBus[numberPassengers-1] = PassengerInBus(passanger, amountOfSeats);
+		PassengerInBus newPassenger(passanger, amountOfSeats);
+	passengers.push_back(newPassenger);
 		}
 	}
-	return 1;
+		return true;
 }
 
 
@@ -59,19 +53,10 @@ Connection& Connection::cancelTickets(Passenger *passanger){
 	/* Funkcja zwalnia wszystkie zajete miejsca
 	* przez pasazera podanego w argumentach
 	*/
-	for (int i = 0; i < numberPassengers; ++i) {
-		if (passengersInBus[i].passenger->getName() == passanger->getName()) {
-			passengersInBus[i]=0;
-			--numberPassengers;
-			PassengerInBus * newTab = new PassengerInBus[numberPassengers];
-			for (int j = 0; j < i; ++j) {
-				newTab[j] = passengersInBus[j];
-			}
-			for (int j = i; j < numberPassengers; ++j) {
-				newTab[j] = passengersInBus[j+1];
-			}
-			delete passengersInBus;
-			passengersInBus = newTab;
+for (int i = 0; i < passengers.size(); ++i) {
+	if (passengers[i].passenger == passanger) {
+	passengers.erase(passengers.begin() + i);
+	break;
 		}
 	}
 	return *this;
@@ -82,8 +67,8 @@ int Connection::freeSeats() const
 {
 	// Zwraca ilosc wolnych miejsc w autobusie
 	int numberOfReservedSeats = 0;
-	for (int i = 0; i < numberPassengers; ++i) {
-		numberOfReservedSeats += passengersInBus[i].amount;
+for (int i = 0; i < passengers.size(); ++i) {
+numberOfReservedSeats += passengers[i].amount;
 	}
 	return bus->getAmountOfPlaces() - numberOfReservedSeats;
 }
@@ -93,8 +78,8 @@ std::string Connection::passangersToString() const{
 	*i ilosc zajetych przez nich miejsc
 	*/
 	std::string ret("");
-	for (int i = 0; i < numberPassengers; ++i) {
-		ret+= passengersInBus[i].passenger->getName() + " " + std::to_string(passengersInBus[i].amount) + "\n";
+for (int i = 0; i < passengers.size(); ++i) {
+ret += passengers[i].passenger->getName() + " " + std::to_string(passengers[i].amount) + "\n";
 	}
 	return ret;
 }
@@ -116,8 +101,8 @@ void Connection::createFromInput(TablePointers<Connection> &tab, const TablePoin
 int Connection::findPassenger(const Passenger *passenger) const{
 	//Znajduje pasazera w liscie pasazerow w autobusie i zwraca jego index
 	//Gdy nie znajduje sie ten pasazer w liscie zwraca -1
-	for (int i = 0; i < numberPassengers; ++i) {
-		if (passengersInBus[i].passenger == passenger) return i;
+for (int i = 0; i < passengers.size(); ++i) {
+if (passengers[i].passenger == passenger) return i;
 	}
 	return -1;
 }
@@ -128,10 +113,7 @@ Connection::Connection(Connection &connection) {
 	line = connection.line;
 	bus = connection.bus;
 	numberPassengers = connection.numberPassengers;
-	passengersInBus = new PassengerInBus[numberPassengers];
-	for (int i = 0; i < numberPassengers; ++i) {
-		passengersInBus[i] = PassengerInBus(connection.passengersInBus[i]);
-	}
+passengers = connection.passengers;
 }
 
 void Connection::operator=(Connection &connection) {
@@ -139,10 +121,7 @@ void Connection::operator=(Connection &connection) {
 	line = connection.line;
 	bus = connection.bus;
 	numberPassengers = connection.numberPassengers;
-	passengersInBus = new PassengerInBus[numberPassengers];
-	for (int i = 0; i < numberPassengers; ++i) {
-		passengersInBus[i] = PassengerInBus(connection.passengersInBus[i]);
-	}
+	passengers = connection.passengers;
 }
 
 std::ostream &operator<<(std::ostream &os, const Connection connection) {

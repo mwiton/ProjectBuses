@@ -33,15 +33,30 @@ void ReadWriteFunctions::readBuses(const std::string string, TablePointers<Bus> 
 }
 
 void ReadWriteFunctions::readPassengers(const std::string string, TablePointers<Passenger> &tab) {
+Passenger *passenger;
     std::ifstream input;
     std::string name;
+char type;
     int size;
     input.open(string);
     if(!(input.is_open())) return;
     input >> size;
     for (int i = 0; i < size; ++i) {
-        input >> name;
-        Passenger* passenger = new Passenger(name);
+    input >> name >> type;
+    switch (type) {
+    case 'N':
+    passenger = new NormalPassenger(name);
+    break;
+    case 'G':
+    passenger = new GroupPassenger(name);
+    break;
+case 'D':
+passenger = new DisabledPassenger(name);
+break;
+default:
+std::cout << "blad odczytu\n";
+return;
+}
         tab.addElement(passenger);
     }
     input.close();
@@ -101,7 +116,7 @@ void ReadWriteFunctions::writePassengers(std::string string, const TablePointers
     if(!(output.is_open())) return;
     output << tab.getSize() << std::endl;
     for (int i = 0; i < tab.getSize(); ++i) {
-        output << tab[i]->getName() << std::endl;
+output << tab[i]->getName() << ' ' << tab[i]->getType() << '\n';
     }
 }
 

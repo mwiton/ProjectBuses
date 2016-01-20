@@ -14,6 +14,11 @@ int main() {
     ReadWriteFunctions::writePassengers("Passangers.txt", passengers);
     ReadWriteFunctions::writeConnections("Connections.txt", connections, lines, buses);
 
+lines.removeAll();
+buses.removeAll();
+passengers.removeAll();
+connections.removeAll();
+
 	return 0;
 }
 
@@ -138,7 +143,9 @@ void buyTicketsInConsole() {
         passenger = passengers[i++];
     } while (passenger->getName() != name);
     int purchase = connections[id]->purchaseTicket(passenger, amount);
-    if(purchase) std::cout << "Cena biletu: " << amount * connections[id]->getBusLine()->getPrice() << " zl\n";
+    if (purchase)
+    std::cout << "Cena biletu: " << amount * connections[id]->getBusLine()->getPrice() *
+    (1 - passenger->getDiscount()) << " zl\n";
 }
 
 void cancelTicketsInConsole() {

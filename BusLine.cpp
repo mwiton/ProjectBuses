@@ -1,6 +1,7 @@
 #include "BusLine.h"
 
 BusLine& BusLine::set(std::string line, std::string st, std::string en, int len, int t){
+	//Setting fields of object
 	nameOfLine = line;
 	startStop = st;
 	endStop = en;
@@ -31,7 +32,7 @@ int BusLine::getTime() const{
 }
 
 void BusLine::createFromInput(TablePointers<BusLine> &tab) {
-	//Tworzy nowy objekt w tablicy wykorzystujac dane z konsoli
+	//Creates a new object in table using data from console
 	std::string name, start, end;
 	int len, time;
 	std::cout << "Podaj nazwe: ";
@@ -49,6 +50,7 @@ void BusLine::createFromInput(TablePointers<BusLine> &tab) {
 }
 
 std::ostream &operator<<(std::ostream &os, const BusLine &line) {
+	//Representing data in console
 	os <<"Linia " << line.getNameOfLine() <<" kursuje miedzy "<<line.getStartStop()<<" a "<<line.getEndStop()<<std::endl;
 	os << "Jej dlugosc to " << line.getLength() << " km i czas przejazdu to " << line.getTime() << " min";
 	return os;

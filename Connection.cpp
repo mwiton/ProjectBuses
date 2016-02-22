@@ -1,6 +1,7 @@
 #include "Connection.h"
 
 Connection& Connection::set(std::string name, BusLine * lineBus, Bus * b){
+	//Setting fields of object
 	nameOfConnection = name;
 	line = lineBus;
 	bus = b;
@@ -23,7 +24,7 @@ Bus * Connection::getBus() const
 }
 
 int Connection::getNumberPassengers() const{
-return passengers.size();
+	return passengers.size();
 }
 
 bool Connection::purchaseTicket(Passenger *passanger, int amountOfSeats) {
@@ -85,7 +86,7 @@ ret += passengers[i].passenger->getName() + " " + std::to_string(passengers[i].a
 }
 
 void Connection::createFromInput(TablePointers<Connection> &tab, const TablePointers<BusLine> &tabLine, const TablePointers<Bus> &tabBus) {
-	//Tworzy nowy objekt w tablicy wykorzystujac dane z konsoli
+	//Creates a new object in table using data from console
 	std::string name;
 	int idbus, idline;
 	std::cout << "Podaj nazwe: ";
@@ -125,6 +126,7 @@ void Connection::operator=(Connection &connection) {
 }
 
 std::ostream &operator<<(std::ostream &os, const Connection connection) {
+	//Representing data in console
 	os << "Polaczenie " << connection.getNameOfConnection() << " na linii "
 	<< connection.getBusLine()->getNameOfLine() << " obslugiwane autobusem "
 	<< connection.getBus()->getNameOfBus() << std::endl;

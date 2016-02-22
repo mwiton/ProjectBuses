@@ -36,27 +36,27 @@ void ReadWriteFunctions::readPassengers(const std::string string, TablePointers<
 Passenger *passenger;
     std::ifstream input;
     std::string name;
-char type;
+    char type;
     int size;
     input.open(string);
     if(!(input.is_open())) return;
     input >> size;
     for (int i = 0; i < size; ++i) {
-    input >> name >> type;
-    switch (type) {
-    case 'N':
-    passenger = new NormalPassenger(name);
-    break;
-    case 'G':
-    passenger = new GroupPassenger(name);
-    break;
-case 'D':
-passenger = new DisabledPassenger(name);
-break;
-default:
-std::cout << "blad odczytu\n";
-return;
-}
+        input >> name >> type;
+        switch (type) {
+            case 'N':
+                passenger = new NormalPassenger(name);
+                break;
+            case 'G':
+                passenger = new GroupPassenger(name);
+                break;
+            case 'D':
+                passenger = new DisabledPassenger(name);
+                break;
+            default:
+                std::cout << "blad odczytu\n";
+                return;
+        }
         tab.addElement(passenger);
     }
     input.close();

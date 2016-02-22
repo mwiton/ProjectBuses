@@ -110,7 +110,12 @@ template <typename T> void TablePointers<T>::removeAll() {
     size = 0;
 }
 
-template <typename T> std::ostream &operator<<(std::ostream &os, const TablePointers<T> &table){
+template<typename T>
+std::ostream &operator<<(std::ostream &os, const TablePointers<T> &table) {
+    if (table() == 0) {
+        os << "Brak danych";
+        return os;
+    }
     for (int i = 0; i < table.getSize(); ++i) {
         os<<"ID: "<<i<<" "<<*(table[i])<<"\n\n";
     }

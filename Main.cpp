@@ -1,7 +1,6 @@
 #include "Main.h"
 
 int main() {
-	//Czytanie danych z plikow
     ReadWriteFunctions::readBusLines("Lines.txt", lines);
     ReadWriteFunctions::readBuses("Buses.txt", buses);
     ReadWriteFunctions::readPassengers("Passangers.txt", passengers);
@@ -14,15 +13,16 @@ int main() {
     ReadWriteFunctions::writePassengers("Passangers.txt", passengers);
     ReadWriteFunctions::writeConnections("Connections.txt", connections, lines, buses);
 
-lines.removeAll();
-buses.removeAll();
-passengers.removeAll();
-connections.removeAll();
+    lines.removeAll();
+    buses.removeAll();
+    passengers.removeAll();
+    connections.removeAll();
 
 	return 0;
 }
 
 void menu1() {
+    //Main menu of program
     int option;
     while (true){
         std::cout << MENU1;
@@ -53,6 +53,7 @@ void menu1() {
 }
 
 void menu2() {
+    //Menu with options to display tables
     int option;
     std::cout << MENU2;
     std::cin >> option;
@@ -78,6 +79,7 @@ void menu2() {
 }
 
 void menu3() {
+    //Menu with options to creating data
     int option;
     std::cout << MENU3;
     std::cin >> option;
@@ -103,6 +105,7 @@ void menu3() {
 }
 
 void menu4() {
+    //Menu with options to elements from tables
     int option, id;
     std::cout << MENU4;
     std::cin >> option;
@@ -130,34 +133,63 @@ void menu4() {
 }
 
 void buyTicketsInConsole() {
+    //Option with buying a ticket for connection
     std::string name;
     int amount, id, i(0);
     Passenger* passenger;
+
     std::cout << "Podaj nazwe pasazera: ";
     std::cin >> name;
-    std::cout << "Podaj ID polaczenia: ";
-    std::cin >> id;
-    std::cout << "Podaj ilosc biletow: ";
-    std::cin >> amount;
-    do{
+    do {
+        if (i == passengers.getSize()) {
+            std::cout << "Brak takiego pasazera\n";
+            return;
+        }
         passenger = passengers[i++];
     } while (passenger->getName() != name);
+
+    std::cout << "Podaj ID polaczenia: ";
+    std::cin >> id;
+    if (id >= connections.getSize() || id < 0) {
+        std::cout << "Nieprawidlowo podany id\n";
+        return;
+    }
+
+    std::cout << "Podaj ilosc biletow: ";
+    std::cin >> amount;
+    if (amount < 0) {
+        std::cout << "Nieprawidlowo podana ilosc\n";
+        return;
+    }
+
     int purchase = connections[id]->purchaseTicket(passenger, amount);
     if (purchase)
-    std::cout << "Cena biletu: " << amount * connections[id]->getBusLine()->getPrice() *
-    (1 - passenger->getDiscount()) << " zl\n";
+        std::cout << "Cena biletu: " << amount * connections[id]->getBusLine()->getPrice() *
+                                        (1 - passenger->getDiscount()) << " zl\n";
 }
 
 void cancelTicketsInConsole() {
+    //Option with canceling a ticket for connection
     std::string name;
     int id, i(0);
     Passenger* passenger;
+
     std::cout << "Podaj nazwe pasazera: ";
     std::cin >> name;
-    std::cout << "Podaj ID polaczenia: ";
-    std::cin >> id;
     do{
+        if (i == passengers.getSize()) {
+            std::cout << "Brak takiego pasazera\n";
+            return;
+        }
         passenger = passengers[i++];
     } while (passenger->getName() != name);
+
+    std::cout << "Podaj ID polaczenia: ";
+    std::cin >> id;
+    if (id >= connections.getSize() || id < 0) {
+        std::cout << "Nieprawidlowo podany id\n";
+        return;
+    }
+
     connections[id]->cancelTickets(passenger);
 }

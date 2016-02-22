@@ -1,6 +1,7 @@
 #include "Bus.h"
 
 Bus& Bus::set(std::string number, int amount){
+    //Setting fields of object
 	numberOfBus = number;
 	amountOfPlaces = amount;
 	return *this;
@@ -16,7 +17,7 @@ int Bus::getAmountOfPlaces() const
 }
 
 void Bus::createFromInput(TablePointers<Bus> &tab) {
-	//Tworzy nowy objekt w tablicy wykorzystujac dane z konsoli
+    //Creates a new object in table using data from console
     std::string name;
     int amount;
     std::cout << "Podaj nazwe: ";
@@ -28,7 +29,7 @@ void Bus::createFromInput(TablePointers<Bus> &tab) {
 }
 
 std::ostream& operator<<(std::ostream &os, const Bus &bus) {
-    //Reprezentacja obiektu w konsoli
+    //Representing data in console
     os << "Numer autobusu: " << bus.getNameOfBus() << "\nIlosc miejsc: " << bus.getAmountOfPlaces();
     return os;
 }
